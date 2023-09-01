@@ -1,4 +1,5 @@
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
     
@@ -48,7 +49,6 @@ struct ContentView: View {
             Rectangle()
                 .frame(width: 350, height: 1)
                 .foregroundColor(.white)
-            
             
             Button {
                 // sign up
