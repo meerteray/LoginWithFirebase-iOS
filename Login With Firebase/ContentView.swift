@@ -5,9 +5,12 @@ struct ContentView: View {
     
     @State private var email = ""
     @State private var password = ""
-    @State private var userIsLoggedIn = false
-    @State var showingPopup = false
     
+    @StateObject private var vm = SignUpViewModel()
+    @EnvironmentObject var coordinator: Coordinator
+    
+    @State var showingPopup = false
+    @State var errorPopup = false
     
     var body: some View {
 
@@ -55,8 +58,19 @@ struct ContentView: View {
                     .foregroundColor(.white)
                 
                 Button {
-                    register()
-                    showingPopup = true
+                //    signUp
+                    vm.signUp(email: email, password: password) { result in
+                        switch result {
+                        case .success(_):
+                            showingPopup = true
+                            coordinator.path.append(.login)
+                            
+                        case .failure(let error):
+                            vm.errorMessage = error.errorMessage
+                            errorPopup = true
+                        }
+                    }
+                    
                 } label:  {
                     Text("Sign up")
                         .bold()
@@ -70,11 +84,17 @@ struct ContentView: View {
                 }
                 .padding(.top)
                 .offset(y: 110)
-                
+                //POP UPS
                 .alert(isPresented: $showingPopup) {
                     Alert(
                         title: Text("Successful"),
                         message: Text("Kayıt işleminiz gerçekleşmiştir"))
+                }
+
+                .alert(isPresented: $errorPopup) {
+                    Alert(
+                        title: Text("Failed"),
+                        message: Text("Bu Email zaten kayıtlı."))
                 }
                 
                 Button {
@@ -89,40 +109,32 @@ struct ContentView: View {
                 
             }
             .frame(width: 350)
-            .onAppear() {
-                Auth.auth().addStateDidChangeListener { auth, user in
-                    if user != nil {
-                        userIsLoggedIn.toggle()
-                    }
-                }
-            }
+
         }
         .ignoresSafeArea()
 
     }
 
-    
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
-                print(error!.localizedDescription)
+                print("1984", error!.localizedDescription)
             }
         }
     }
-    
-    func register() {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-            }
-        }
-    }
-    
 }
-    
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NavigationStack {
+            ContentView()
+        } .navigationDestination(for: Route.self) { route in
+            switch route {
+            case .login:
+                Text("LOGIN SCREEN")
+            }
+        }
+    
     }
 }
 
