@@ -74,9 +74,10 @@ struct ContentView: View {
                         case .failure(let error):
                             suvm.errorMessage = error.errorMessage
                             errorPopup = true
+                            print("1984 Pop up Error")
                         }
+                        
                     }
-                    
                 } label:  {
                     Text("Sign up")
                         .bold()
@@ -132,18 +133,9 @@ struct ContentView: View {
 
     }
 }
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            ContentView()
-        } .navigationDestination(for: Route.self) { route in
-            switch route {
-            case .login:
-                Text("LOGIN SCREEN")
-            }
-        }
-    
+        ContentView()
     }
 }
 
