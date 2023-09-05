@@ -6,6 +6,7 @@ struct ContentView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
+    @State var showingPopup = false
     
     
     var body: some View {
@@ -55,6 +56,7 @@ struct ContentView: View {
                 
                 Button {
                     register()
+                    showingPopup = true
                 } label:  {
                     Text("Sign up")
                         .bold()
@@ -68,6 +70,12 @@ struct ContentView: View {
                 }
                 .padding(.top)
                 .offset(y: 110)
+                
+                .alert(isPresented: $showingPopup) {
+                    Alert(
+                        title: Text("Successful"),
+                        message: Text("Kayıt işleminiz gerçekleşmiştir"))
+                }
                 
                 Button {
                     login()
