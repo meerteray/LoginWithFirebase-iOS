@@ -24,7 +24,9 @@ struct Login_With_FirebaseApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject private var mailsuvm = SignUpViewModel()
     @ObservedObject var coordinator = Coordinator()
+    @State var showingPopup = false
     
     var body: some Scene {
         WindowGroup {
@@ -38,6 +40,9 @@ struct Login_With_FirebaseApp: App {
                     }
                 
             }.environmentObject(coordinator)
+    
         }
+        
     }
+    
 }

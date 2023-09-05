@@ -6,10 +6,12 @@ struct ContentView: View {
     @State private var email = ""
     @State private var password = ""
     
-    @StateObject private var vm = SignUpViewModel()
+    @StateObject private var suvm = SignUpViewModel()
+    @StateObject private var lvm = LoginViewModel()
     @EnvironmentObject var coordinator: Coordinator
     
     @State var showingPopup = false
+    @State var emptyPopup = false
     @State var errorPopup = false
     
     var body: some View {
@@ -58,15 +60,19 @@ struct ContentView: View {
                     .foregroundColor(.white)
                 
                 Button {
-                //    signUp
-                    vm.signUp(email: email, password: password) { result in
+                    guard !email.isEmpty, !password.isEmpty else {
+                        emptyPopup = true
+                        return
+                    }
+                    
+                    suvm.signUp(email: email, password: password) { result in
                         switch result {
                         case .success(_):
                             showingPopup = true
                             coordinator.path.append(.login)
                             
                         case .failure(let error):
-                            vm.errorMessage = error.errorMessage
+                            suvm.errorMessage = error.errorMessage
                             errorPopup = true
                         }
                     }
@@ -89,16 +95,27 @@ struct ContentView: View {
                     Alert(
                         title: Text("Successful"),
                         message: Text("Kayıt işleminiz gerçekleşmiştir"))
-                }
+                }  
 
                 .alert(isPresented: $errorPopup) {
                     Alert(
                         title: Text("Failed"),
                         message: Text("Bu Email zaten kayıtlı."))
                 }
-                
+                .alert(isPresented: $emptyPopup) {
+                    Alert(
+                        title: Text("Failed"),
+                        message: Text("Hatalı Giriş."))
+                }
+                // Login
                 Button {
-                    login()
+                    guard !email.isEmpty, !password.isEmpty else {
+                        emptyPopup = true
+                        return
+                    }
+                
+                    lvm.login1(email: email, password: password) 
+                    coordinator.path.append(.login)
                 } label:  {
                     Text("Already have an account? Login")
                         .bold()
@@ -113,14 +130,6 @@ struct ContentView: View {
         }
         .ignoresSafeArea()
 
-    }
-
-    func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print("1984", error!.localizedDescription)
-            }
-        }
     }
 }
 
