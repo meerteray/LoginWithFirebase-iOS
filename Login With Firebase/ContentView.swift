@@ -10,14 +10,6 @@ struct ContentView: View {
     
     var body: some View {
 
-        if userIsLoggedIn {
-            ListView()
-        } else {
-            content
-        }
-    }
-    
-    var content: some View {
         ZStack {
             Color.black
             
@@ -100,6 +92,7 @@ struct ContentView: View {
         .ignoresSafeArea()
 
     }
+
     
     func login() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
@@ -116,8 +109,6 @@ struct ContentView: View {
             }
         }
     }
-    
-    
     
 }
     
