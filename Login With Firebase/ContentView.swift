@@ -10,9 +10,12 @@ struct ContentView: View {
     @StateObject private var lvm = LoginViewModel()
     @EnvironmentObject var coordinator: Coordinator
     
-    @State var showingPopup = false
-    @State var emptyPopup = false
-    @State var errorPopup = false
+    @State private var showAlert = false
+    @State private var activeAlert: ActiveAlert = .showingPopup
+    
+    enum ActiveAlert {
+        case showingPopup, errorPopup, emptyPopup
+    }
     
     var body: some View {
 
@@ -61,24 +64,26 @@ struct ContentView: View {
                 
                 Button {
                     guard !email.isEmpty, !password.isEmpty else {
-                        emptyPopup = true
+                        showAlert = true
+                        self.activeAlert = .emptyPopup
                         return
                     }
                     
                     suvm.signUp(email: email, password: password) { result in
                         switch result {
                         case .success(_):
-                            showingPopup = true
-                            coordinator.path.append(.login)
-                            
+                            showAlert = true
+                            self.activeAlert = .showingPopup
+                     //     coordinator.path.append(.login)
                         case .failure(let error):
                             suvm.errorMessage = error.errorMessage
-                            errorPopup = true
-                            print("1984 Pop up Error")
+                            showAlert = true
+                            self.activeAlert = .errorPopup
                         }
                         
                     }
-                } label:  {
+                }
+                label:  {
                     Text("Sign up")
                         .bold()
                         .frame(width: 200, height: 40)
@@ -92,26 +97,22 @@ struct ContentView: View {
                 .padding(.top)
                 .offset(y: 110)
                 //POP UPS
-                .alert(isPresented: $showingPopup) {
-                    Alert(
-                        title: Text("Successful"),
-                        message: Text("Kayıt işleminiz gerçekleşmiştir"))
-                }  
+                .alert(isPresented: $showAlert) {
+                    switch activeAlert {
+                        case .showingPopup:
+                            return Alert(title: Text("Successful"), message: Text("Kayıt işleminiz gerçekleşmiştir."))
+                        case .errorPopup:
+                            return Alert(title: Text("Failed"), message: Text("Bu Email zaten kayıtlı."))
+                        case .emptyPopup:
+                            return Alert(title: Text("Failed"), message: Text("Hatalı Giriş."))
 
-                .alert(isPresented: $errorPopup) {
-                    Alert(
-                        title: Text("Failed"),
-                        message: Text("Bu Email zaten kayıtlı."))
-                }
-                .alert(isPresented: $emptyPopup) {
-                    Alert(
-                        title: Text("Failed"),
-                        message: Text("Hatalı Giriş."))
+                    }
                 }
                 // Login
                 Button {
                     guard !email.isEmpty, !password.isEmpty else {
-                        emptyPopup = true
+                        self.activeAlert = .emptyPopup
+                        showAlert = true
                         return
                     }
                 
