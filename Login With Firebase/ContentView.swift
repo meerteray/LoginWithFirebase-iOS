@@ -21,43 +21,27 @@ struct ContentView: View {
         
         NavigationView {
         ZStack {
-            Color.black
-            
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .foregroundStyle(.linearGradient(colors: [.pink, .red, .blue], startPoint:
-                        .topLeading, endPoint: .bottomTrailing))
-                .frame(width: 1000, height: 400)
-                .rotationEffect(.degrees(135))
-                .offset(y: -560)
-            VStack(spacing: 20) {
-                Text("Welcome")
-                    .foregroundColor( .white)
+            Color.white
+            VStack(spacing: 24) {
+                Text("Welcome!")
+                    .foregroundColor( .black)
                     .font(.system(size: 40, weight: .bold, design: .rounded))
-                    .offset(x: -100, y: 0)
+                    .offset(x: -90, y: -100)
                 
-                TextField("Email", text: $email)
-                    .foregroundColor(.white)
+                Text("Email Adress")
+                    .bold()
+                    .offset(x: -125, y: 20)
+                TextField("name@examplecom", text: $email)
+                    .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                    .placeholder(when: email.isEmpty) {
-                        Text("Email")
-                            .foregroundColor(.white)
-                            .bold()
-                    }
-                Rectangle()
-                    .frame(width: 350, height: 1)
-                    .foregroundColor(.white)
-                SecureField("Password", text: $password)
-                    .foregroundColor(.white)
+
+                Text("Password")
+                    .bold()
+                    .offset(x: -136, y: 20)
+                SecureField("Enter Your Password", text: $password)
+                    .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                    .placeholder(when: password.isEmpty) {
-                        Text("Password")
-                            .foregroundColor(.white)
-                            .bold()
-                    }
-                Rectangle()
-                    .frame(width: 350, height: 1)
-                    .foregroundColor(.white)
-                
+                    
                 Button {
                     guard !email.isEmpty, !password.isEmpty else {
                         showAlert = true
@@ -83,14 +67,14 @@ struct ContentView: View {
                     .frame(width: 200, height: 40)
                     .background(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(.linearGradient(colors: [.white], startPoint:
+                            .fill(.linearGradient(colors: [.blue], startPoint:
                                     .top, endPoint: .bottomTrailing))
                     )
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
             }
             .padding(.top)
             .offset(y: 110)
-                //POP UPS
+            //POP UPS
             .alert(isPresented: $showAlert) {
                 switch activeAlert {
                 case .showingPopup:
@@ -101,31 +85,13 @@ struct ContentView: View {
                     return Alert(title: Text("Failed"), message: Text("Hatalı Giriş."))
                 }
             }
-                // Login
-              /*  Button {
-                    guard !email.isEmpty, !password.isEmpty else {
-                        self.activeAlert = .emptyPopup
-                        showAlert = true
-                        return
-                    }
-                    lvm.login1(email: email, password: password)
-                    //     coordinator.path.append(.login)
-                }
-                
-                
-            label:  {
-                Text("Already have an account? Login")
-                    .bold()
-                    .foregroundColor(.white)
-            } */
-                
                 NavigationLink(destination: LoginView()) {
                     Text("Already have an account? Login")
                         .bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(.blue)
                 }
             .padding(.top)
-            .offset(y: 110)
+            .offset(y: 170)
             }
             .frame(width: 350)
         }
