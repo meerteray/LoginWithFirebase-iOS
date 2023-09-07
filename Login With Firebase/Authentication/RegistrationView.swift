@@ -1,16 +1,73 @@
-//
-//  RegistrationView.swift
-//  Login With Firebase
-//
-//  Created by Mert Eray on 7.09.2023.
-//
-
 import SwiftUI
 
 struct RegistrationView: View {
+    @State private var email = ""
+    @State private var fullname = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         VStack{
+            Text("Sign Up")
+                .foregroundColor( .black)
+                .font(.system(size: 40, weight: .bold, design: .rounded))
+                .offset(x: -5, y: 1)
             
+            VStack(spacing: 24) {
+                InputView(text: $email,
+                          title: "Email Address",
+                          placeholder: "name@example.com")
+                .offset(x: 5, y: 100)
+                .autocapitalization(.none)
+                
+                InputView(text: $fullname,
+                          title: "Full Name",
+                          placeholder: "Enter your name")
+                .offset(x: 5, y: 100)
+                
+                InputView(text: $password,
+                          title: "Password",
+                          placeholder: "Enter your password",
+                          isSecureField: true)
+                .offset(x: 5, y: 100)
+                
+                
+                InputView(text: $confirmPassword,
+                          title: "Confirm Password",
+                          placeholder: "Confirm your password",
+                          isSecureField: true)
+                .offset(x: 5, y: 100)
+            }
+            Button {
+                print("Sign user up..")
+            } label: {
+                HStack {
+                    Text("SIGN UP")
+                        .fontWeight(.semibold)
+                    //  Image(systemName: "arrow.right")
+                }
+                .foregroundColor(.white)
+                .frame(width: UIScreen.main.bounds.width - 250,height: 42 )
+            }
+            .background(Color(.systemBlue))
+            .cornerRadius(10)
+            .padding(.top, 24)
+            .offset(x: 5, y: 100)
+            
+            Spacer()
+
+            Button {
+                dismiss()
+            } label: {
+                HStack(spacing: 3){
+                    Text("Already have an account?")
+                    Text("Sign in")
+                        .fontWeight(.bold)
+                }
+                .font(.system(size: 14))
+            }
+
         }
     }
 }

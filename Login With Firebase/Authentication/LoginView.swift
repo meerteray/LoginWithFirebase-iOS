@@ -8,7 +8,7 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             VStack{
-                Text("Welcome!")
+                Text("Login")
                     .foregroundColor( .black)
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .offset(x: -5, y: 1)
@@ -53,11 +53,12 @@ struct LoginView: View {
                 // sign up button
                 
                 NavigationLink {
-                    
+                    RegistrationView()
+                        .navigationBarBackButtonHidden(true)
                 } label: {
                     HStack(spacing: 3){
                         Text("Don't have an account?")
-                        Text("Sign Up")
+                        Text("Sign up")
                             .fontWeight(.bold)
                     }
                     .font(.system(size: 14))
