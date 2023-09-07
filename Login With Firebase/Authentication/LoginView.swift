@@ -30,8 +30,39 @@ struct LoginView: View {
                 .padding(.horizontal)
                 .padding(.top, 12)
                 
+                // sign in button
                 
+                Button {
+                    print("Log user in..")
+                } label: {
+                    HStack {
+                        Text("SIGN IN")
+                            .fontWeight(.semibold)
+                        //  Image(systemName: "arrow.right")
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: UIScreen.main.bounds.width - 250,height: 42 )
+                }
+                .background(Color(.systemBlue))
+                .cornerRadius(10)
+                .padding(.top, 24)
+                .offset(x: 5, y: 100)
+
                 Spacer()
+                
+                // sign up button
+                
+                NavigationLink {
+                    
+                } label: {
+                    HStack(spacing: 3){
+                        Text("Don't have an account?")
+                        Text("Sign Up")
+                            .fontWeight(.bold)
+                    }
+                    .font(.system(size: 14))
+                }
+
             }
         }
     }
