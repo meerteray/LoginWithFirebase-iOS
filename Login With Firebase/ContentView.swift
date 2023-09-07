@@ -26,7 +26,7 @@ struct ContentView: View {
                 Text("Welcome!")
                     .foregroundColor( .black)
                     .font(.system(size: 40, weight: .bold, design: .rounded))
-                    .offset(x: -90, y: -100)
+                    .offset(x: -90, y: -110)
                 
                 Text("Email Adress")
                     .bold()
@@ -73,7 +73,7 @@ struct ContentView: View {
                     .foregroundColor(.white)
             }
             .padding(.top)
-            .offset(y: 110)
+            .offset(y: 50)
             //POP UPS
             .alert(isPresented: $showAlert) {
                 switch activeAlert {
