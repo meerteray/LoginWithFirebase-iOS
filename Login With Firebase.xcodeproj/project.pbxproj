@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E38830642AA9F68E00A7A883 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38830632AA9F68E00A7A883 /* LoginView.swift */; };
 		E3C54B222AA1CBF400864A21 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E3C54B212AA1CBF400864A21 /* FirebaseAuth */; };
 		E3C54B242AA1CBF400864A21 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E3C54B232AA1CBF400864A21 /* FirebaseFirestore */; };
 		E3C54B262AA1D32A00864A21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3C54B252AA1D32A00864A21 /* GoogleService-Info.plist */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E38830632AA9F68E00A7A883 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E3C54B252AA1D32A00864A21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3D7CA992AA734B90070FE4E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		E3D7CA9B2AA7534E0070FE4E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				E3D7CA982AA734970070FE4E /* View Models */,
 				E3D92E8C2A9E2FB400EEF107 /* Login_With_FirebaseApp.swift */,
 				E3D92E8E2A9E2FB400EEF107 /* ContentView.swift */,
+				E38830632AA9F68E00A7A883 /* LoginView.swift */,
 				E3D92E902A9E2FB500EEF107 /* Assets.xcassets */,
 				E3C54B252AA1D32A00864A21 /* GoogleService-Info.plist */,
 				E3D92E922A9E2FB500EEF107 /* Preview Content */,
@@ -169,6 +172,7 @@
 				E3D7CA9C2AA7534E0070FE4E /* LoginViewModel.swift in Sources */,
 				E3D92E8F2A9E2FB400EEF107 /* ContentView.swift in Sources */,
 				E3D7CA9A2AA734B90070FE4E /* SignUpViewModel.swift in Sources */,
+				E38830642AA9F68E00A7A883 /* LoginView.swift in Sources */,
 				E3D92E8D2A9E2FB400EEF107 /* Login_With_FirebaseApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
