@@ -1,5 +1,6 @@
 import Foundation
 import Firebase
+import FirebaseFirestoreSwift
 
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
