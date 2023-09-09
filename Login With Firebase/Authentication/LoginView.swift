@@ -75,7 +75,7 @@ struct LoginView: View {
     }
         
 }
-
+// AuthenticationFormProtocol
 extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty
