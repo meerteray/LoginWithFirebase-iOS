@@ -8,6 +8,8 @@ struct RegistrationView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: AuthViewModel
     
+    @State private var successfulAlert = false
+    
     var body: some View {
         VStack{
             Text("Sign Up")
@@ -46,6 +48,8 @@ struct RegistrationView: View {
                                                    password: password,
                                                    fullname: fullname)
                 }
+                successfulAlert = true
+
             } label: {
                 HStack {
                     Text("SIGN UP")
@@ -55,6 +59,10 @@ struct RegistrationView: View {
                 .foregroundColor(.white)
                 .frame(width: UIScreen.main.bounds.width - 250,height: 42 )
             }
+            .alert("Kayıt işleminiz gerçekleşmiştir.", isPresented: $successfulAlert) {
+                       Button("OK", role: .cancel) { }
+                   }
+            
             .background(Color(.systemBlue))
             .disabled(!formIsValid)
             .opacity(formIsValid ? 1.0 : 0.5)
