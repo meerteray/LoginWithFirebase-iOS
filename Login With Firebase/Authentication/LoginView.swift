@@ -14,7 +14,6 @@ struct LoginView: View {
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .offset(x: -5, y: 1)
 
-                
                 VStack(spacing: 24) {
                     InputView(text: $email,
                               title: "Email Address",
